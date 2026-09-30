@@ -212,35 +212,3 @@ Subscribe over WebSocket with:
 The server returns normalized `status` and `quote` messages.
 
 </details>
-
-## GitHub publishing checklist
-
-Publishing the source and hosting a public dashboard are separate tasks. The current backend binds to loopback and checks local browser origins. Public hosting requires additional deployment work, including authentication and an explicit origin policy.
-
-Local review on **30 September 2026**: frontend production build passed, the native CTest suite passed, all **16 browser tests passed**, and npm audit reported **0 known vulnerabilities**. Git ignore rules were checked using a temporary Git directory; 42 candidate source files contained no matches for the local API key values. This was a targeted source check, not a full secret or native-dependency security audit. Real-provider checks and clean-machine setup were not run.
-
-Before the first public push:
-
-- [ ] Confirm the copyright holder and replace the bracketed fields in [LICENSE](LICENSE).
-- [ ] Review the articles in `docs/` for obsolete Node-backend instructions, local details and editorial metadata. In particular, `docs/tut.md` still includes Node examples without a historical-draft notice; the older named tutorial and editorial notes already have notices.
-- [ ] Verify setup on a clean Windows machine or CI runner. Local builds do not establish that a fresh machine has every prerequisite.
-- [ ] Initialize Git, choose the GitHub owner/repository and configure its remote. This workspace had no `.git` directory during the publishing review.
-- [ ] Review staged files before committing: include `.env.example` and `frontend/package-lock.json`; exclude `.env`, `.cache/`, `node_modules/`, build output, test reports and personal editor settings. Run a secret scan on the staged content and any history before pushing.
-- [ ] Run the build and test commands above, then commit and push the reviewed source.
-
-Recommended follow-ups:
-
-- [ ] Add GitHub Actions for the frontend build, native tests and browser tests.
-- [ ] Add a dashboard screenshot and a short repository description/topics.
-- [ ] Add contribution and security-reporting instructions if accepting public contributions.
-- [ ] Remove unused starter files such as `frontend/src/counter.ts`, `frontend/src/assets/vite.svg` and `frontend/src/assets/typescript.svg` if they are no longer needed.
-- [ ] Before distributing prebuilt binaries, document the runtime DLLs and include the relevant dependency license notices.
-
-## License and references
-
-Project license: [MIT](LICENSE). TradingView Lightweight Charts carries its own [notice](frontend/public/NOTICE.txt); retain the chart attribution and footer link when modifying the UI.
-
-- [TraderMade REST API](https://marketdata.tradermade.com/docs/restful-api)
-- [TraderMade streaming API](https://marketdata.tradermade.com/docs/streaming-data-api)
-- [TradingView Lightweight Charts](https://tradingview.github.io/lightweight-charts/)
-- [Apache Arrow C++ Parquet](https://arrow.apache.org/docs/cpp/parquet.html)
